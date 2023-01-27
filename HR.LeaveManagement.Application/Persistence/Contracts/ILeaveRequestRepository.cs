@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveManagement.Application.Persistence.Contracts
 {
-    public interface ILeaveRequestRepository:IGenericRepository<LeaveRequest>
+    public interface ILeaveRequestRepository : IGenericRepository<LeaveRequest>
     {
         Task<LeaveRequest> GetLeaveRequeatWithDetails(int Id);
         Task<List<LeaveRequest>> GetLeaveRequeatsWithDetails();
+        Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool? approvalStatus);
     }
 }
