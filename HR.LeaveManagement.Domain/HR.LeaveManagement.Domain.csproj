@@ -4,6 +4,9 @@
 	<!--
 	
 	شامل فقط دامین است  پوکو کلس ها
+	
+	
+	به جایی رفرنس ندارد
 	-->
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
