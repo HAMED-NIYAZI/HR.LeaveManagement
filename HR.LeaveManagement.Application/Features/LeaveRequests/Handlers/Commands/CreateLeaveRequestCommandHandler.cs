@@ -1,20 +1,17 @@
 ﻿using AutoMapper;
-using HR.LeaveManagement.Application.Features.LeaveAllocations.Requests.Commands;
-using HR.LeaveManagement.Application.Persistence.Contracts;
+using FluentValidation.Results;
+using HR.LeaveManagement.Application.Contracts.Infrastructure;
+using HR.LeaveManagement.Application.Contracts.Persistence;
+using HR.LeaveManagement.Application.DTOs.LeaveRequest.Validator;
+using HR.LeaveManagement.Application.Features.LeaveRequests.Requests.Commands;
+using HR.LeaveManagement.Application.Model;
+using HR.LeaveManagement.Application.Responses;
+using HR.LeaveManagement.Domain.Entity;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using HR.LeaveManagement.Application.Features.LeaveRequests.Requests.Commands;
-using HR.LeaveManagement.Domain.Entity;
-using FluentValidation.Results;
-using HR.LeaveManagement.Application.DTOs.LeaveType.Validator;
-using HR.LeaveManagement.Application.DTOs.LeaveRequest.Validator;
-using HR.LeaveManagement.Application.Exceptions;
-using HR.LeaveManagement.Application.Responses;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequests.Handlers.Commands
 {
@@ -25,14 +22,18 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Handlers.Command
     {
         private readonly ILeaveRequestRepository _leaveRequestRepository;
         private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly IEmailSender _emailSender;
+
         private readonly IMapper _mapper;
         public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,
                IMapper mapper,
-               ILeaveTypeRepository leaveTypeRepository)
+               ILeaveTypeRepository leaveTypeRepository,
+               IEmailSender emailSender)
         {
             _leaveRequestRepository = leaveRequestRepository;
             _mapper = mapper;
             _leaveTypeRepository = leaveTypeRepository;
+            _emailSender = emailSender;
         }
         public async Task<BaseCommandResponse> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
         {
@@ -53,7 +54,25 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Handlers.Command
 
             response.Success = true;
             response.Message = "Creation Successful";
-            response.Id= leaveAllocation.Id;
+            response.Id = leaveAllocation.Id;
+
+            var email = new Email
+            {
+                To = "employee@org.com",
+                Body = $"Your leave request for {request.LeaveRequestDto.StartDate:D} to {request.LeaveRequestDto.EndDate:D}" +
+                $" has been submitted successfully.",
+                Subject = "Leave Request Submitted"
+            };
+
+            try
+            {
+                await _emailSender.SendEmail(email);
+            }
+            catch (Exception ex)
+            {
+                // log or handle error, but dont throw
+            }
+
 
             return response;
         }
