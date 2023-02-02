@@ -14,9 +14,18 @@ namespace HR.LeaveManagement.Persistence
         {
         }
 
+
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //   // base.OnConfiguring(optionsBuilder);
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-20DRNS1\\SQL2019;Database=hr_leavemanagement_db;Trusted_Connection=True;MultipleActiveResultSets=true");
+        //}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveManagementDbContext).Assembly);   
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveManagementDbContext).Assembly);
+ 
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken=default)
@@ -36,5 +45,7 @@ namespace HR.LeaveManagement.Persistence
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
+
+
     }
 }

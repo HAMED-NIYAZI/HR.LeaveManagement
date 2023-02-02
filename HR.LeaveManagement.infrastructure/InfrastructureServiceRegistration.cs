@@ -13,7 +13,8 @@ namespace HR.LeaveManagement.infrastructure
         public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<EmailSender>(configuration.GetSection("EmailSettings"));
-            services.AddTransient<IEmailSender, EmailSender>();
+           // services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IEmailSender, EmailSender>();
 
             return services;
         }
