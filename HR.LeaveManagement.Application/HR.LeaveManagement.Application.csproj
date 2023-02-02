@@ -1,9 +1,34 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
    </PropertyGroup>
 
+	
+	<!--
+	شامل
+	dto
+	.
+	.
+	.
+	
+	
+	می باشد
+	
+	تمام بیسطینس کار و اساس کار اینجاست و همه از این رفرنس میگیرند بجز دامین
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	به 
+	HR.LeaveManagement.Domain
+	رفرنس دارد
+	-->
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />

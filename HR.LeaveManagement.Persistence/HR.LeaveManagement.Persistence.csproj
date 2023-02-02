@@ -1,10 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+<!--
+این کلاس لایبرری 
+شامل
+پیاده سازی ریپازیتوری  
+دی بی کانتکست
+کانفیگ سرویس های این پروژه
 
+
+
+به 
+HR.LeaveManagement.Application 
+رفرنس دارد
+
+-->
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />

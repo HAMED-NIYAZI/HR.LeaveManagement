@@ -4,6 +4,23 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	
+
+<!--
+
+شامل پیاده سازی های کاربردی است
+پیاده سازی MailSender
+و شامل رجیستر کردن پیاده سازی ها و کانفیگ مربوط به ارسال ایمیل از اپ ستینگز
+
+
+
+
+
+
+به 
+HR.LeaveManagement.Application 
+رفرنس دارد
+-->
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
